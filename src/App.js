@@ -36,10 +36,17 @@ function App() {
         <form onSubmit={handleSubmit}>
           <label htmlFor="year-input">Enter year: </label>
           <br />
-          <input id="year-input" name="year" />
+          <input
+            id="year-input"
+            name="year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          />
           <br />
           <span className="side">
-            <button type="submit">submit</button>
+            <button type="submit" disabled={year.length === 0}>
+              submit
+            </button>
           </span>
         </form>
         {hasAnswered && <p id="error">{error}</p>}
