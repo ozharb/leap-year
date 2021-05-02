@@ -1,7 +1,9 @@
 import React from "react";
-import Frog from "./Frog";
+import Ball from "./Ball";
 import { useState, useEffect } from "react";
 import { leapYear } from "./leapYear-function";
+import "./App.css";
+
 function App() {
   const [year, setYear] = useState(0);
   const [error, setError] = useState("");
@@ -28,21 +30,28 @@ function App() {
   }, [year, error]);
 
   return (
-    <main className="App">
-      <h1>Leap Year</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="year-input">Enter year:</label>
-        <input id="year-input" name="year" />
-        <button type="submit">submit</button>
-      </form>
-      {hasAnswered && <p id="error">{error}</p>}
-      {hasAnswered && (
-        <p>
-          The year, {year}, is {response}
-        </p>
-      )}
-      <Frog response={response} year={year} />
-    </main>
+    <>
+      <main className="App">
+        <h1>Leap Year Checker</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="year-input">Enter year: </label>
+          <br />
+          <input id="year-input" name="year" />
+          <br />
+          <span className="side">
+            <button type="submit">submit</button>
+          </span>
+        </form>
+        {hasAnswered && <p id="error">{error}</p>}
+        {hasAnswered && !error && (
+          <p>
+            The year, {year}, is {response}
+          </p>
+        )}
+        <Ball response={response} year={year} error={error} />
+      </main>
+      <footer>© Oz Harb</footer>
+    </>
   );
 }
 
